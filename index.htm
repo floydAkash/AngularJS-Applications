@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="myApp">
+    <head>
+        <title>Lichess HTTP API Sample App</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="UTF-8">
+
+        <!-- load bootstrap and fontawesome via CDN -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        <style>
+            html, body, input, select, textarea
+            {
+                font-size: 1.05em;
+            }
+        </style>
+        
+        <!-- load angular via CDN -->
+        <script src="https://code.angularjs.org/1.3.0-rc.1/angular.min.js"></script>
+		<script src="app.js"></script>
+    </head>
+    <body>
+
+        <header>
+			<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Lichess user lookup</a>
+				</div>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+				</ul>
+			</div>
+			</nav>
+		</header>
+
+        <div class="container">
+			<div ng-controller="mainController">
+            <form  name="myForm" novalidate>
+                <div>
+		    <p>For a list of Lichess usernames, please click <a href="http://en.lichess.org/player">here</a>.</p>
+                    <label>Enter the lichess username</label>
+                    <input type="text" name ="handle" ng-model="handle" placeholder="ex. thibault" required/>	
+					<input type="submit" class="btn btn-default" ng-click ="generateUserInfo(userName)" />
+				</div>	
+			</form>
+                
+                <hr />
+                
+                <h1>lichess.org/@/{{ lowercasehandle() }}</h1>
+                
+                <h2>User details</h2>
+
+               <!-- Display the result in a tabular view-->
+               <div>
+               	<table class="table table-bordered">
+               		<thead>
+               			<tr>
+               				<th>Key</th>
+               				<th>Value</th>
+               			</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Username</td>
+							<td>{{userInfo.username}}</td>
+						</tr>
+						<tr>
+							<td>Online?</td>
+							<td>{{userInfo.online}}</td>
+						</tr>
+						<tr>
+
+							<td>Name<span ng-if="isDefined(userInfo.profile.firstName"></td>
+							<td>{{userInfo.profile.firstName + " " + userInfo.profile.lastName || errorMsg}}</span>
+
+							</td>
+						</tr>
+						<tr>
+							<td>Bullet Rating</td>
+							<td>{{userInfo.perfs.bullet.rating}}</td>
+						</tr>
+						<tr>
+							<td>Blitz Rating</td>
+							<td>{{userInfo.perfs.blitz.rating}}</td>
+						</tr>
+						<tr>
+							<td>Classical</td>
+							<td>{{userInfo.perfs.classical.rating}}</td>
+						</tr>
+						<tr>
+							<td>Chess 960</td>
+							<td>{{userInfo.perfs.chess960.rating}}</td>
+						</tr>
+						<tr>
+							<td>King of The Hill</td>
+							<td>{{userInfo.perfs.kingOfTheHill.rating}}</td>
+						</tr>
+						<tr>
+							<td>Three Check</td>
+							<td>{{userInfo.perfs.threeCheck.rating}}</td>
+						</tr>
+						<tr>
+							<td>Horde</td>
+							<td>{{userInfo.perfs.horde.rating}}</td>
+						</tr>
+						<tr>
+							<td>Puzzle</td>
+							<td>{{userInfo.perfs.puzzle.rating}}</td>
+						</tr>
+					</tbody>
+               	</table>
+               </div>
+
+		</div>
+
+	<div id="footer">
+      <div class="container">
+        <p class="muted credit">Copyright &copy Akash 2015.</p>
+      </div>
+    </div>
+
+    </body>
+</html>
