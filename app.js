@@ -18,9 +18,9 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', function ($sco
 		var userName = $scope.handle;
 		console.log(userName);
 
-	//HTTP resource to connect to Lichess API
+	//HTTPS resource to connect to Lichess API
 	
-	var url="http://en.lichess.org/api/user/"+userName+"?callback=JSON_CALLBACK";
+	var url="https://en.lichess.org/api/user/"+userName+"?callback=JSON_CALLBACK";
     $http.jsonp(url)
         .success(function(result){
 			console.log(result);
